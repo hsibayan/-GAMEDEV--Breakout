@@ -27,12 +27,10 @@ bool HelloWorld::init()
 		/* pages:
 		0 - start
 		1 - game proper
-		2 - pause
 		3 - game over	*/
 
 		// Set up ball
 		ballBody = PhysicsBody::createCircle(15, PhysicsMaterial(0, 1, 0));
-		//ballBody = PhysicsBody::createBox(Size(30, 30), PhysicsMaterial(0, 1, 0));
 		ballBody->setDynamic(true);
 		ballBody->setCollisionBitmask(1);
 		ballBody->setContactTestBitmask(true);
@@ -152,7 +150,7 @@ bool HelloWorld::init()
 					} break;
 
 				case EventKeyboard::KeyCode::KEY_ESCAPE:
-					if (currPage == 2 || currPage == 3)
+					if (currPage == 0 || currPage == 3)
 						Director::getInstance()->end();
 			};
 		};

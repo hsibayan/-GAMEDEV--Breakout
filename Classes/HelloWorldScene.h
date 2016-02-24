@@ -33,5 +33,4 @@ private:
 	boolean moving, onStartPage = true;
 	Vec2 currVelocity;
 	int currPage;
-	int brickCount;
 };

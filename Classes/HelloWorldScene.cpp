@@ -23,7 +23,6 @@ bool HelloWorld::init()
 		// Basic stuff
 		movement = ' ';
 		moving = false;
-		brickCount = 10;
 
 		/* pages:
 		0 - start
@@ -77,8 +76,8 @@ bool HelloWorld::init()
 		// Set up bricks
 		Sprite *brick;
 		int tagCounter = 1;
-		for (int i = 0; i < 1; i++) {
-			for (int j = 0; j < 5; j++) {
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 10; j++) {
 				switch (i) {
 				case 0: brick = Sprite::create("redbrick.jpg"); break;
 				case 1: brick = Sprite::create("orangebrick.jpg"); break;
@@ -96,7 +95,7 @@ bool HelloWorld::init()
 				
 				brick->setTag(tagCounter);
 				brick->setAnchorPoint(Point(0, 0));
-				brick->setPosition(Point(j * 100 + 300, (490 - (i * 30))));
+				brick->setPosition(Point(j * 100, (490 - (i * 30))));
 				brick->setPhysicsBody(brickBody);
 				this->addChild(brick);
 

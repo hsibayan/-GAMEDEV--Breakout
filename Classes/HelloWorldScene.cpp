@@ -23,6 +23,7 @@ bool HelloWorld::init()
 		// Basic stuff
 		movement = ' ';
 		moving = false;
+		brickCount = 10;
 
 		/* pages:
 		0 - start
@@ -76,8 +77,8 @@ bool HelloWorld::init()
 		// Set up bricks
 		Sprite *brick;
 		int tagCounter = 1;
-		for (int i = 0; i < 6; i++) {
-			for (int j = 0; j < 10; j++) {
+		for (int i = 0; i < 1; i++) {
+			for (int j = 0; j < 5; j++) {
 				switch (i) {
 				case 0: brick = Sprite::create("redbrick.jpg"); break;
 				case 1: brick = Sprite::create("orangebrick.jpg"); break;
@@ -95,7 +96,7 @@ bool HelloWorld::init()
 				
 				brick->setTag(tagCounter);
 				brick->setAnchorPoint(Point(0, 0));
-				brick->setPosition(Point(j * 100, (490 - (i * 30))));
+				brick->setPosition(Point(j * 100 + 300, (490 - (i * 30))));
 				brick->setPhysicsBody(brickBody);
 				this->addChild(brick);
 
@@ -143,7 +144,7 @@ bool HelloWorld::init()
 						onStartPage = false;
 						startpage->runAction(MoveTo::create(1, Vec2(500, -550)));
 						this->removeChild(startpage);
-						ball->getPhysicsBody()->setVelocity(Vec2(300, 400));
+						ball->getPhysicsBody()->setVelocity(Vec2(400, 400));
 						break;
 					case 3:	// GAME OVER
 						this->removeAllChildren();
@@ -207,10 +208,18 @@ bool HelloWorld::onContactBegin(PhysicsContact &contact) {
 
 	// ball / brick
 	if (collided(1, 4, A, B)) {
-		if (tag_a != 0)
+		if (tag_a != 0) {
 			this->removeChildByTag(tag_a);
+		}
 		else if (tag_b != 0)
 			this->removeChildByTag(tag_b);	
+
+		if (this->getChildrenCount() == 4) {
+			currPage = 3;
+			winpage = Sprite::create("YouDidIt.jpg");
+			winpage->setPosition(500, 275);
+			this->addChild(winpage);
+		}
 	}
 
 	return true;
